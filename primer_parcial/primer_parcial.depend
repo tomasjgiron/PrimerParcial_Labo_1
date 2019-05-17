@@ -1,0 +1,49 @@
+# depslib dependency file v1.0
+1558048373 source:/home/alumno/primer_parcial/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"arraynuevo.h"
+	"musico.h"
+	"instrumento.h"
+	"orquesta.h"
+
+1557952166 source:/home/alumno/primer_parcial/arraynuevo.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"arraynuevo.h"
+
+1557952166 /home/alumno/primer_parcial/arraynuevo.h
+
+1558049546 source:/home/alumno/primer_parcial/instrumento.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"arraynuevo.h"
+	"instrumento.h"
+
+1558051466 source:/home/alumno/primer_parcial/musico.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"arraynuevo.h"
+	"musico.h"
+	"orquesta.h"
+	"instrumento.h"
+
+1558051402 /home/alumno/primer_parcial/musico.h
+	"orquesta.h"
+	"instrumento.h"
+
+1558048252 /home/alumno/primer_parcial/orquesta.h
+
+1558048489 /home/alumno/primer_parcial/instrumento.h
+
+1558048193 source:/home/alumno/primer_parcial/orquesta.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"arraynuevo.h"
+	"orquesta.h"
+
