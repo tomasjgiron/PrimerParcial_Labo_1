@@ -18,10 +18,8 @@ int main()
     Instrumento instrumentos[LEN_INS];
     int flagOrquesta = 0;
     int flagMusico = 0;
-    int flagInstrumento = 0;
     int contadorOrquesta = 0;
     int contadorMusico = 0;
-    int contadorInstrumento = 0;
     int opcion = 0;
     int escape = 10;
 
@@ -85,6 +83,7 @@ int main()
                 {
                     if(flagOrquesta)
                     {
+                        instrumento_getID(instrumentos,LEN_INS,"Informacion invalida",TRIES);
                         musico_addMusico(musicos,LEN_MUS,
                          orquestas,LEN_ORQ,
                          instrumentos,LEN_INS,
@@ -102,7 +101,7 @@ int main()
                 {
                     if(flagMusico)
                     {
-                        musico_printMusico(musicos,instrumentos,LEN_MUS,LEN_INS)
+                        musico_printMusico(musicos,instrumentos,LEN_MUS,LEN_INS);
                         musico_modifyMusico(musicos,LEN_MUS,orquestas,LEN_ORQ,"Informacion invalida",3,TRIES);
 
                     }
@@ -116,7 +115,7 @@ int main()
                 {
                     if(flagMusico)
                     {
-                        musico_printMusico(musicos,LEN_MUS);
+                        musico_printMusico(musicos,instrumentos,LEN_MUS,LEN_INS);
                         if(musico_removeMusico(musicos,LEN_MUS,"Informacion invalida",TRIES))
                         {
                             contadorMusico--;
@@ -136,10 +135,7 @@ int main()
                 {
                     if(flagMusico)
                     {
-                        if(libro_removeLibro(musicos,LEN_MUS,"informacion invalida",TRIES) == 0)
-                        {
-
-                        }
+                        musico_printMusico(musicos,instrumentos,LEN_MUS,LEN_INS);
                     }
                     else
                     {
@@ -149,68 +145,29 @@ int main()
                 }
                 case 8:
                 {
-                    if(flagMusico)
+                    if(flagMusico && flagOrquesta)
                     {
-                        libro_sortLibroTitulo(musicos,LEN_MUS);
-                        libro_printLibro(musicos,orquestas,LEN_ORQ,LEN_MUS);
+                        if(instrumento_addInstrumento(instrumentos,LEN_INS,
+                        "Informacion invalida",TRIES) == 0)
+                        {
+                            instrumento_printInstrumentoID(instrumentos,LEN_INS);
+                        }
                     }
                     else
                     {
-                        printf("\n\tNo hay musicos para mostrar\t\n");
+                        printf("\n\tNo hay musicos u orquestas para mostrar\t\n");
                     }
                     break;
                 }
                 case 9:
                 {
-                    if(socio_addSocio(instrumentos,LEN_INS,"informacion invalida",TRIES) == 0)
+                    if(flagMusico && flagOrquesta)
                     {
-                        flagInstrumento = 1;
-                        contadorInstrumento++;
-                    }
-                    break;
-                }
-                case 10:
-                {
-                    if(flagInstrumento)
-                    {
-                        socio_printSocio(instrumentos,LEN_INS);
-                        socio_modifySocio(instrumentos,LEN_INS,"informacion invalida",3,TRIES);
+                        instrumento_printInstrumento(instrumentos,LEN_INS);
                     }
                     else
                     {
-                        printf("\n\tNo hay instrumentos para mostrar\t\n");
-                    }
-                    break;
-                }
-                case 11:
-                {
-                    if(flagInstrumento)
-                    {
-                        if(socio_removeSocio(instrumentos,LEN_INS,"informacion invalida",TRIES) == 0)
-                        {
-                            contadorInstrumento--;
-                            if(contadorInstrumento == 0)
-                            {
-                                flagInstrumento = 0;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        printf("\n\tNo hay instrumentos para mostrar\t\n");
-                    }
-                    break;
-                }
-                case 12:
-                {
-                    if(flagInstrumento)
-                    {
-                        socio_sortSocioSurnameName(instrumentos,LEN_INS,1);
-                        socio_printSocio(instrumentos,LEN_INS);
-                    }
-                    else
-                    {
-                        printf("\n\tNo hay instrumentos para mostrar\t\n");
+                        printf("\n\tNo hay musicos u orquestas para mostrar\t\n");
                     }
                     break;
                 }

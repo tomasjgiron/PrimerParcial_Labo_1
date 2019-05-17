@@ -11,7 +11,11 @@
 
 
 static int generateID(void);
-
+/** \brief Indica que todas las posiciones del array están vacías al colocar el isEmpty como 1
+* \param lista puntero de orquesta al array de orquesta
+* \param len del array
+* \return retorna 0 diciendo que no hay error
+*/
 int orquesta_initArray(Orquesta* pOrquestas, int len)
 {
     int i;
@@ -25,7 +29,13 @@ int orquesta_initArray(Orquesta* pOrquestas, int len)
     }
     return 0;
 }
-
+/** \brief Realiza la funcion de carga de orquestas dentro del array
+* \param lista puntero de orquesta al array de orquesta
+* \param tamaño del array
+* \param msgE mensajes de error de las funciones
+* \param tries reintentos a la hora de volver a cargar algo
+* \return retorna 0 diciendo que no hay error o -1 si encuentra un error
+*/
 int orquesta_addOrquesta(Orquesta* pOrquestas,int len, char* msgE,int tries)
 {
     int indexFree;
@@ -63,7 +73,11 @@ int orquesta_addOrquesta(Orquesta* pOrquestas,int len, char* msgE,int tries)
 
     return ret;
 }
-
+/** \brief Busca el espacio en el array donde haya espacio (-1)
+* \param lista puntero de Empleado al array de empleados
+* \param tamaño del array
+* \return retorna la posicion o -1 si encuentra un error
+*/
 int orquesta_searchFreeSpace(Orquesta* pOrquestas, int len)
 {
     int i;
@@ -82,7 +96,12 @@ int orquesta_searchFreeSpace(Orquesta* pOrquestas, int len)
     }
     return ret;
 }
-
+/** \brief Busca la posicion de un ID comparandolo con otro
+* \param lista puntero de Empleado al array de empleados
+* \param tamaño del array
+* \param idEmp usa para comparar un id con otro
+* \return retorna la posicion o -1 si encuentra un error
+*/
 int orquesta_findPosID(Orquesta* pOrquestas, int len,int idOrq)
 {
     int i;
@@ -101,7 +120,13 @@ int orquesta_findPosID(Orquesta* pOrquestas, int len,int idOrq)
     }
     return ret;
 }
-
+/** \brief Realiza la baja lógica de orquestas dentro de la nómina
+* \param lista puntero de orquesta al array de orquesta
+* \param tamaño del array
+* \param msgE mensajes de errores
+* \param tries reintentos de la función
+* \return retorna 0 diciendo que no hay error
+*/
 int orquesta_removeOrquesta(Orquesta* pOrquestas, int len,char* msgE,int tries)
 {
     int auxiliarID;
@@ -128,7 +153,13 @@ int orquesta_removeOrquesta(Orquesta* pOrquestas, int len,char* msgE,int tries)
     }
     return ret;
 }
-
+/** \brief Le deja ingresar al usuario un ID
+* \param lista puntero de orquesta al array de orquestas
+* \param tamaño del array
+* \param msgE mensajes de errores
+* \param tries reintentos de la función
+* \return retorna el ID que el usuario ingresa o -1 si hay un error
+*/
 int orquesta_getID(Orquesta* pOrquestas, int len, char* msgE, int tries)
 {
     char bufferID[20];
@@ -145,7 +176,11 @@ int orquesta_getID(Orquesta* pOrquestas, int len, char* msgE, int tries)
     }
     return ret;
 }
-
+/** \brief Permite imprimir el array completo de orquesta
+* \param lista puntero de orquesta al array de orquesta
+* \param tamaño del array
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int orquesta_printOrquesta(Orquesta* pOrquestas,int len)
 {
     int i;
@@ -171,7 +206,11 @@ int orquesta_printOrquesta(Orquesta* pOrquestas,int len)
     }
     return 0;
 }
-
+/** \brief Permite imprimir el id del array de orquesta
+* \param lista puntero de  al array de orquesta
+* \param tamaño del array
+* \return retorna 0 diciendo que no hay error o -1 si lo hay
+*/
 int orquesta_printOrquestaID(Orquesta* pOrquestas,int len)
 {
     int i;
