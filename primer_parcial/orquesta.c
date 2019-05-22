@@ -36,7 +36,7 @@ int orquesta_initArray(Orquesta* pOrquestas, int len)
 * \param tries reintentos a la hora de volver a cargar algo
 * \return retorna 0 diciendo que no hay error o -1 si encuentra un error
 */
-int orquesta_addOrquesta(Orquesta* pOrquestas,int len, char* msgE,int tries)
+int orquesta_addOrquesta(Orquesta* pOrquestas,int len,int* idAlta, char* msgE,int tries)
 {
     int indexFree;
     char bufferName[50];
@@ -61,6 +61,7 @@ int orquesta_addOrquesta(Orquesta* pOrquestas,int len, char* msgE,int tries)
                         pOrquestas[indexFree].type = auxiliarType;
                         pOrquestas[indexFree].isEmpty = 0;
                         pOrquestas[indexFree].idOrquesta = generateID();
+                        *idAlta = indexFree;
                         ret = 0;
                     }
             }
@@ -127,7 +128,7 @@ int orquesta_findPosID(Orquesta* pOrquestas, int len,int idOrq)
 * \param tries reintentos de la función
 * \return retorna 0 diciendo que no hay error
 */
-int orquesta_removeOrquesta(Orquesta* pOrquestas, int len,char* msgE,int tries)
+int orquesta_removeOrquesta(Orquesta* pOrquestas, int len, int* idBorrado,char* msgE,int tries)
 {
     int auxiliarID;
     int posID;
@@ -142,6 +143,7 @@ int orquesta_removeOrquesta(Orquesta* pOrquestas, int len,char* msgE,int tries)
             if(posID != -1)
             {
                 pOrquestas[posID].isEmpty = 1;
+                *idBorrado = posID;
                 ret = 0;
             }
             else
@@ -211,6 +213,30 @@ int orquesta_printOrquesta(Orquesta* pOrquestas,int len)
 * \param tamaño del array
 * \return retorna 0 diciendo que no hay error o -1 si lo hay
 */
+int orquesta_printValorRepetidoInt(Orquesta* pOrquestas,int len,int valorBuscado)
+{
+    int i;
+    int flag = -1;
+
+    if(pOrquestas != NULL && len > 0)
+    {
+        for(i=0;i<len;i++)
+        {
+            if(pOrquestas[i].idOrquesta == valorBuscado)
+            {
+                printf("\nID Orquesta: %d\n--------"
+                ,pOrquestas[i].idOrquesta);
+                flag = 0;
+            }
+        }
+    if(flag)
+        {
+            printf("\n\tNo se encontraron valores\t\n");
+        }
+    }
+    return 0;
+}
+
 int orquesta_printOrquestaID(Orquesta* pOrquestas,int len)
 {
     int i;
@@ -233,6 +259,49 @@ int orquesta_printOrquestaID(Orquesta* pOrquestas,int len)
         }
     }
     return 0;
+}
+
+int orquesta_sortOrquestaNameType(Orquesta* pOrquestas,int len,int order)
+{
+    int i;
+    int j;
+    Orquesta buffer;
+    int ret = -1;
+
+    if(pOrquestas != NULL && len > 0)
+    {
+        for(i=0;i<len-1;i++)
+        {
+            for(j=i+1;j<len;j++)
+            {
+                if(order == 1 && (strcmp(pOrquestas[j].name,pOrquestas[i].name) < 0))
+                {
+                    buffer = pOrquestas[i];
+                    pOrquestas[i] = pOrquestas[j];
+                    pOrquestas[j] = buffer;
+                    ret = 0;
+                }
+                else if(order == 0 && (strcmp(pOrquestas[j].name,pOrquestas[i].name) > 0))
+                {
+                    buffer = pOrquestas[i];
+                    pOrquestas[i] = pOrquestas[j];
+                    pOrquestas[j] = buffer;
+                    ret = 0;
+                }
+                else if(strcmp(pOrquestas[j].name,pOrquestas[i].name) == 0)
+                {
+                    if(pOrquestas[i].type > pOrquestas[j].type)
+                    {
+                        buffer = pOrquestas[i];
+                        pOrquestas[i] = pOrquestas[j];
+                        pOrquestas[j] = buffer;
+                        ret = 0;
+                    }
+                }
+            }
+        }
+    }
+    return ret;
 }
 
 static int generateID(void)

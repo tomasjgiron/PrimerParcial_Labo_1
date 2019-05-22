@@ -14,15 +14,17 @@ typedef struct
 
 int orquesta_initArray(Orquesta* pOrquestas, int len);
 
-int orquesta_addOrquesta(Orquesta* pOrquestas,int len, char* msgE,int tries);
+int orquesta_addOrquesta(Orquesta* pOrquestas,int len,int* idAlta, char* msgE,int tries);
 
-int orquesta_removeOrquesta(Orquesta* pOrquestas, int len,char* msgE,int tries);
+int orquesta_removeOrquesta(Orquesta* pOrquestas, int len, int* idBorrado,char* msgE,int tries);
 
 int orquesta_printOrquesta(Orquesta* pOrquestas,int len);
 
 int orquesta_printOrquestaID(Orquesta* pOrquestas,int len);
 
-int orquesta_sortOrquestaSurnameName(Orquesta* pOrquestas,int len,int order);
+int orquesta_printValorRepetidoInt(Orquesta* pOrquestas,int len,int valorBuscado);
+
+int orquesta_sortOrquestaNameType(Orquesta* pOrquestas,int len,int order);
 
 //int orquesta_printTotalPromAboveSalary(Orquesta* pOrquestas, int len);
 

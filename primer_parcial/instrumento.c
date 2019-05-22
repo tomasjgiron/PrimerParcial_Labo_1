@@ -25,7 +25,7 @@ int instrumento_initArray(Instrumento* pInstrumentos, int len)
     return 0;
 }
 
-int instrumento_addInstrumento(Instrumento* pInstrumentos,int len, char* msgE,int tries)
+int instrumento_addInstrumento(Instrumento* pInstrumentos,int len,int* idAlta, char* msgE,int tries)
 {
     int indexFree;
     char bufferName[31];
@@ -47,6 +47,7 @@ int instrumento_addInstrumento(Instrumento* pInstrumentos,int len, char* msgE,in
                         pInstrumentos[indexFree].type = auxiliarType;
                         pInstrumentos[indexFree].isEmpty = 0;
                         pInstrumentos[indexFree].idInstrumento = generateID();
+                        *idAlta = indexFree;
                         ret = 0;
 
                     }
@@ -154,14 +155,59 @@ int instrumento_printInstrumento(Instrumento* pInstrumentos,int len)
         {
             if(pInstrumentos[i].isEmpty == 0)
             {
-                printf("\nID Instrumento: %d\nNombre: %s"
-                "\nTipo (1-Cuerda|2-Viento Madera|3-Viento Metal|4-Percusion): %d\n--------"
-                ,pInstrumentos[i].idInstrumento,pInstrumentos[i].name,
-                pInstrumentos[i].type);
+                printf("\nID Instrumento: %d\nNombre: %s\n"
+                ,pInstrumentos[i].idInstrumento,pInstrumentos[i].name);
+                instrumento_printTipo(pInstrumentos[i].type);
+                printf("--------\n");
                 flag = 0;
             }
         }
 
+    if(flag)
+        {
+            printf("\n\tNo se encontraron valores\t\n");
+        }
+    }
+    return 0;
+}
+
+int instrumento_printTipo(int tipoInstrumento)
+{
+    printf("\n");
+    switch (tipoInstrumento)
+    {
+        case 1:
+            printf("Tipo: Cuerdas\n");
+            break;
+        case 2:
+            printf("Tipo: viento-madera\n");
+            break;
+        case 3:
+            printf("Tipo: viento-metal\n");
+            break;
+        case 4:
+            printf("Tipo: percusion\n");
+            break;
+    }
+    return 0;
+}
+
+int instrumento_printValorRepetidoInt(Instrumento* pInstrumentos,int len,int valorBuscado)
+{
+    int i;
+    int flag = -1;
+
+    if(pInstrumentos != NULL && len > 0)
+    {
+        for(i=0;i<len;i++)
+        {
+            if(pInstrumentos[i].idInstrumento == valorBuscado)
+            {
+                printf("\nID Instrumento: %d\n--------"
+                ,pInstrumentos[i].idInstrumento);
+                flag = 0;
+            }
+        }
     if(flag)
         {
             printf("\n\tNo se encontraron valores\t\n");
@@ -193,6 +239,49 @@ int instrumento_printInstrumentoID(Instrumento* pInstrumentos,int len)
     }
     return 0;
 }
+
+/*int emp_sortEmployeeSurnameSector(Employee* pEmployees,int len,int order)
+{
+    int i;
+    int j;
+    Employee buffer;
+    int ret = -1;
+
+    if(pEmployees != NULL && len > 0)
+    {
+        for(i=0;i<len-1;i++)
+        {
+            for(j=i+1;j<len;j++)
+            {
+                if(order == 1 && (strcmp(pEmployees[j].surname,pEmployees[i].surname) < 0))
+                {
+                    buffer = pEmployees[i];
+                    pEmployees[i] = pEmployees[j];
+                    pEmployees[j] = buffer;
+                    ret = 0;
+                }
+                else if(order == 0 && (strcmp(pEmployees[j].surname,pEmployees[i].surname) > 0))
+                {
+                    buffer = pEmployees[i];
+                    pEmployees[i] = pEmployees[j];
+                    pEmployees[j] = buffer;
+                    ret = 0;
+                }
+                else if(strcmp(pEmployees[j].surname,pEmployees[i].surname) == 0)
+                {
+                    if(pEmployees[i].sector > pEmployees[j].sector)
+                    {
+                        buffer = pEmployees[i];
+                        pEmployees[i] = pEmployees[j];
+                        pEmployees[j] = buffer;
+                        ret = 0;
+                    }
+                }
+            }
+        }
+    }
+    return ret;
+}*/
 
 static int generateID(void)
 {

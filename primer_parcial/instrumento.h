@@ -13,13 +13,17 @@ typedef struct
 
 int instrumento_initArray(Instrumento* pInstrumentos, int len);
 
-int instrumento_addInstrumento(Instrumento* pInstrumentos,int len, char* msgE,int tries);
+int instrumento_addInstrumento(Instrumento* pInstrumentos,int len,int* idAlta, char* msgE,int tries);
 
 int instrumento_removeInstrumento(Instrumento* pInstrumentos, int len,char* msgE,int tries);
 
 int instrumento_printInstrumento(Instrumento* pInstrumentos,int len);
 
+int instrumento_printTipo(int tipoInstrumento);
+
 int instrumento_printInstrumentoID(Instrumento* pInstrumentos,int len);
+
+int instrumento_printValorRepetidoInt(Instrumento* pInstrumentos,int len,int valorBuscado);
 
 
 //int instrumento_sortInstrumentoSurnameName(Instrumento* pInstrumentos,int len,int order);

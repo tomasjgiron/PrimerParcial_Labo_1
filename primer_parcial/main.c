@@ -7,9 +7,9 @@
 #include "orquesta.h"
 
 #define TRIES 3
-#define LEN_ORQ 1
-#define LEN_INS 1
-#define LEN_MUS 1
+#define LEN_ORQ 5
+#define LEN_INS 5
+#define LEN_MUS 5
 
 int main()
 {
@@ -18,10 +18,15 @@ int main()
     Instrumento instrumentos[LEN_INS];
     int flagOrquesta = 0;
     int flagMusico = 0;
+    int flagInstrumento = 0;
     int contadorOrquesta = 0;
     int contadorMusico = 0;
     int opcion = 0;
     int escape = 10;
+    int auxiliarIdBorrado;
+    int auxiliarIdAltaOrquesta;
+    int auxiliarIdAltaInstrumento;
+
 
         orquesta_initArray(orquestas,LEN_ORQ);
         musico_initArray(musicos,LEN_MUS);
@@ -39,11 +44,11 @@ int main()
             {
                 case 1:
                 {
-                    if(orquesta_addOrquesta(orquestas,LEN_ORQ,"Informacion invalida",TRIES) == 0)
+                    if(orquesta_addOrquesta(orquestas,LEN_ORQ,&auxiliarIdAltaOrquesta,"Informacion invalida",TRIES) == 0)
                        {
                            flagOrquesta = 1;
                            contadorOrquesta++;
-                           orquesta_printOrquestaID(orquestas,LEN_ORQ);
+                           orquesta_printValorRepetidoInt(orquestas,LEN_ORQ,auxiliarIdAltaOrquesta);
                        }
                     break;
                 }
@@ -52,9 +57,10 @@ int main()
                     if(flagOrquesta)
                     {
                         orquesta_printOrquesta(orquestas,LEN_ORQ);
-                        if(orquesta_removeOrquesta(orquestas,LEN_ORQ,"Informacion invalida",TRIES) == 0)
+                        if(orquesta_removeOrquesta(orquestas,LEN_ORQ,&auxiliarIdBorrado,"Informacion invalida",TRIES) == 0)
                         {
                             contadorOrquesta--;
+                            musico_bajaValorRepetidoInt(musicos,LEN_MUS,auxiliarIdBorrado);
                             if(contadorOrquesta == 0)
                             {
                                 flagOrquesta = 0;
@@ -81,9 +87,8 @@ int main()
                 }
                 case 4:
                 {
-                    if(flagOrquesta)
+                    if(flagOrquesta && flagInstrumento)
                     {
-                        instrumento_getID(instrumentos,LEN_INS,"Informacion invalida",TRIES);
                         musico_addMusico(musicos,LEN_MUS,
                          orquestas,LEN_ORQ,
                          instrumentos,LEN_INS,
@@ -93,7 +98,7 @@ int main()
                     }
                     else
                     {
-                        printf("\n\tNo hay orquestas para mostrar\t\n");
+                        printf("\n\tNo hay orquestas y/o instrumentos para mostrar\t\n");
                     }
                     break;
                 }
@@ -145,33 +150,34 @@ int main()
                 }
                 case 8:
                 {
-                    if(flagMusico && flagOrquesta)
+                    if(flagOrquesta)
                     {
-                        if(instrumento_addInstrumento(instrumentos,LEN_INS,
-                        "Informacion invalida",TRIES) == 0)
-                        {
-                            instrumento_printInstrumentoID(instrumentos,LEN_INS);
-                        }
+                        if(instrumento_addInstrumento(instrumentos,LEN_INS,&auxiliarIdAltaInstrumento,"Informacion invalida",TRIES) == 0)
+                       {
+                           flagInstrumento = 1;
+                           instrumento_printValorRepetidoInt(instrumentos,LEN_INS,auxiliarIdAltaInstrumento);
+                       }
                     }
                     else
                     {
-                        printf("\n\tNo hay musicos u orquestas para mostrar\t\n");
+                        printf("\n\tNo hay orquestas para mostrar\t\n");
                     }
                     break;
                 }
                 case 9:
                 {
-                    if(flagMusico && flagOrquesta)
+                    if(flagInstrumento)
                     {
                         instrumento_printInstrumento(instrumentos,LEN_INS);
                     }
                     else
                     {
-                        printf("\n\tNo hay musicos u orquestas para mostrar\t\n");
+                        printf("\n\tNo hay instrumentos para mostrar\t\n");
                     }
                     break;
                 }
             }
+            fflush(stdin);
         }
     return 0;
 }
