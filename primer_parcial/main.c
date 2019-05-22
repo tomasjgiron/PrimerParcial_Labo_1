@@ -7,9 +7,9 @@
 #include "orquesta.h"
 
 #define TRIES 3
-#define LEN_ORQ 5
-#define LEN_INS 5
-#define LEN_MUS 5
+#define LEN_ORQ 50
+#define LEN_INS 20
+#define LEN_MUS 1000
 
 int main()
 {
@@ -22,7 +22,7 @@ int main()
     int contadorOrquesta = 0;
     int contadorMusico = 0;
     int opcion = 0;
-    int escape = 10;
+    int escape = 11;
     int auxiliarIdBorrado;
     int auxiliarIdAltaOrquesta;
     int auxiliarIdAltaInstrumento;
@@ -35,7 +35,7 @@ int main()
         {
             printf("\n1.ALTA ORQUESTA\n2.BAJA ORQUESTA\n3.IMPRIMIR ORQUESTAS\n~~~"
                     "\n4.ALTA MUSICO\n5.MODIFICAR MUSICO\n6.BAJA MUSICO\n7.IMPRIMIR MUSICOS\n~~~"
-                    "\n8.ALTA INSTRUMENTO\n9.IMPRIMIR INSTRUMENTOS\n10.SALIR\n");
+                    "\n8.ALTA INSTRUMENTO\n9.IMPRIMIR INSTRUMENTOS\n10.INFORMES\n11.SALIR\n");
 
             getIntInRange(&opcion,"\nIngrese opcion: ",
                           "Informacion invalida\n",1,escape,TRIES);
@@ -176,8 +176,13 @@ int main()
                     }
                     break;
                 }
-            }
+                case 10:
+                {
+
+                }
             fflush(stdin);
+            }
         }
+
     return 0;
 }

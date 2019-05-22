@@ -227,6 +227,7 @@ int orquesta_printValorRepetidoInt(Orquesta* pOrquestas,int len,int valorBuscado
                 printf("\nID Orquesta: %d\n--------"
                 ,pOrquestas[i].idOrquesta);
                 flag = 0;
+                break;
             }
         }
     if(flag)
@@ -302,6 +303,24 @@ int orquesta_sortOrquestaNameType(Orquesta* pOrquestas,int len,int order)
         }
     }
     return ret;
+}
+
+int orquesta_printTipo(int tipoOrquesta)
+{
+    printf("\n");
+    switch (tipoOrquesta)
+    {
+        case 1:
+            printf("Tipo: Sinfonica\n");
+            break;
+        case 2:
+            printf("Tipo: Filarmonica\n");
+            break;
+        case 3:
+            printf("Tipo: Camara\n");
+            break;
+    }
+    return 0;
 }
 
 static int generateID(void)

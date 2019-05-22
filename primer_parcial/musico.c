@@ -37,8 +37,8 @@ int musico_addMusico(Musico* pMusicos,int lenMus,
     int posIDInstrumento;
     int ret = -1;
 
-    if(pMusicos != NULL && pOrquestas != NULL && pMusicos != NULL && lenMus > 0
-       && lenOrq > 0 && lenMus > 0)
+    if(pMusicos != NULL && pOrquestas != NULL && pInstrumentos != NULL && lenMus > 0
+       && lenOrq > 0 && lenIns > 0)
     {
         indexFree = musico_searchFreeSpace(pMusicos,lenMus);
         auxiliarIDOrquesta = orquesta_getID(pOrquestas,lenOrq,msgE,tries);
@@ -253,49 +253,6 @@ int musico_modifyMusico(Musico* pMusicos,int lenMus,Orquesta* pOrquestas,int len
     return ret;
 }
 
-/*int emp_sortEmployeeSurnameSector(Employee* pEmployees,int len,int order)
-{
-    int i;
-    int j;
-    Employee buffer;
-    int ret = -1;
-
-    if(pEmployees != NULL && len > 0)
-    {
-        for(i=0;i<len-1;i++)
-        {
-            for(j=i+1;j<len;j++)
-            {
-                if(order == 1 && (strcmp(pEmployees[j].surname,pEmployees[i].surname) < 0))
-                {
-                    buffer = pEmployees[i];
-                    pEmployees[i] = pEmployees[j];
-                    pEmployees[j] = buffer;
-                    ret = 0;
-                }
-                else if(order == 0 && (strcmp(pEmployees[j].surname,pEmployees[i].surname) > 0))
-                {
-                    buffer = pEmployees[i];
-                    pEmployees[i] = pEmployees[j];
-                    pEmployees[j] = buffer;
-                    ret = 0;
-                }
-                else if(strcmp(pEmployees[j].surname,pEmployees[i].surname) == 0)
-                {
-                    if(pEmployees[i].sector > pEmployees[j].sector)
-                    {
-                        buffer = pEmployees[i];
-                        pEmployees[i] = pEmployees[j];
-                        pEmployees[j] = buffer;
-                        ret = 0;
-                    }
-                }
-            }
-        }
-    }
-    return ret;
-}
-*/
 int musico_bubbleSortEficiente(Musico* pMusicos, int len,int order)///1up 0down
 {
     int i;
@@ -326,10 +283,6 @@ int musico_bubbleSortEficiente(Musico* pMusicos, int len,int order)///1up 0down
                     retorno=0;
                 }
             }
-        }
-        if(flagNoEstaOrdenado==0)
-        {
-            musico_sortMusicoEdad(pMusicos,len,order);
         }
     }
     return retorno;

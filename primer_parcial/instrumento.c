@@ -206,6 +206,7 @@ int instrumento_printValorRepetidoInt(Instrumento* pInstrumentos,int len,int val
                 printf("\nID Instrumento: %d\n--------"
                 ,pInstrumentos[i].idInstrumento);
                 flag = 0;
+                break;
             }
         }
     if(flag)

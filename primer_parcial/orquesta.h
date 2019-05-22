@@ -7,6 +7,7 @@ typedef struct
     char name[50];
     char place[50];
     int type;
+    int cantMusicos;
     int isEmpty; /// lleno=0 ; vacio=1
 }Orquesta;
 
@@ -25,6 +26,8 @@ int orquesta_printOrquestaID(Orquesta* pOrquestas,int len);
 int orquesta_printValorRepetidoInt(Orquesta* pOrquestas,int len,int valorBuscado);
 
 int orquesta_sortOrquestaNameType(Orquesta* pOrquestas,int len,int order);
+
+int orquesta_printTipo(int tipoOrquesta);
 
 //int orquesta_printTotalPromAboveSalary(Orquesta* pOrquestas, int len);
 
