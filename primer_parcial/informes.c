@@ -336,7 +336,7 @@ int informe_promedioMusicosPorOrquesta(Musico* pMusicos, int lenMusico,Orquesta*
                 contador++;
             }
         }
-        prom = acumuladorTotal/contador;
+        prom = (float)acumuladorTotal/contador;
 
         printf("El promedio de musicos es: %.2f\n",prom);
     }
