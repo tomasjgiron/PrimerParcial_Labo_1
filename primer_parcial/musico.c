@@ -3,8 +3,7 @@
 #include <string.h>
 #include "arraynuevo.h"
 #include "musico.h"
-#include "orquesta.h"
-#include "instrumento.h"
+
 
 static int generateID(void);
 
@@ -158,7 +157,7 @@ int musico_getID(Musico* pMusicos, int len, char* msgE, int tries)
 
     if(pMusicos != NULL && len > 0)
     {
-        if(getStringNumerosInt(bufferID,"\nIngrese ID Instrumento: ",msgE,tries) == 0)
+        if(getStringNumerosInt(bufferID,"\nIngrese ID Musico: ",msgE,tries) == 0)
         {
             auxiliarID = atoi(bufferID);
             ret = auxiliarID;
@@ -253,7 +252,7 @@ int musico_modifyMusico(Musico* pMusicos,int lenMus,Orquesta* pOrquestas,int len
     return ret;
 }
 
-int musico_bubbleSortEficiente(Musico* pMusicos, int len,int order)///1up 0down
+int musico_bubbleSortEficienteSurname(Musico* pMusicos, int len,int order)///1up 0down
 {
     int i;
     int flagNoEstaOrdenado=1;
@@ -312,6 +311,65 @@ int musico_sortMusicoEdad(Musico* pMusicos,int len,int order)
         }
     }
     return 0;
+}
+
+int musico_sortMusicoIdOrquesta(Musico* pMusicos,int len,int order)
+{
+    int i;
+    Musico buffer;
+
+    for(i=1;i<len;i++)
+    {
+        if(pMusicos[i-1].idOrquesta == pMusicos[i].idOrquesta)
+        {
+            if((order == 1)&&(pMusicos[i-1].idOrquesta > pMusicos[i].idOrquesta))
+            {
+                buffer=pMusicos[i-1];
+                pMusicos[i-1]=pMusicos[i];
+                pMusicos[i]=buffer;
+            }
+            else if((order == 0)&&(pMusicos[i-1].idOrquesta < pMusicos[i].idOrquesta))
+            {
+                buffer=pMusicos[i-1];
+                pMusicos[i-1]=pMusicos[i];
+                pMusicos[i]=buffer;
+            }
+        }
+    }
+    return 0;
+}
+
+int musico_sortMusicosSurname(Musico* pMusicos,int len,int order)
+{
+    int i;
+    int j;
+    Musico buffer;
+    int ret = -1;
+
+    if(pMusicos != NULL && len > 0)
+    {
+        for(i=0;i<len-1;i++)
+        {
+            for(j=i+1;j<len;j++)
+            {
+                if(order == 1 && (strcmp(pMusicos[j].surname,pMusicos[i].surname) < 0))
+                {
+                    buffer = pMusicos[i];
+                    pMusicos[i] = pMusicos[j];
+                    pMusicos[j] = buffer;
+                    ret = 0;
+                }
+                else if(order == 0 && (strcmp(pMusicos[j].surname,pMusicos[i].surname) > 0))
+                {
+                    buffer = pMusicos[i];
+                    pMusicos[i] = pMusicos[j];
+                    pMusicos[j] = buffer;
+                    ret = 0;
+                }
+            }
+        }
+    }
+    return ret;
 }
 
 static int generateID(void)

@@ -27,9 +27,13 @@ int musico_removeMusico(Musico* pMusicos, int len,char* msgE,int tries);
 
 int musico_bajaValorRepetidoInt(Musico* pMusicos, int len, int valorBuscado);
 
-int musico_bubbleSortEficiente(Musico* pMusicos, int len,int order);///1up 0down
+int musico_bubbleSortEficienteSurname(Musico* pMusicos, int len,int order);///1up 0down
+
+int musico_sortMusicosSurname(Musico* pMusicos,int len,int order);
 
 int musico_sortMusicoEdad(Musico* pMusicos,int len,int order);
+
+int musico_sortMusicoIdOrquesta(Musico* pMusicos,int len,int order);
 
 int musico_printMusico(Musico* pMusicos,Instrumento* pInstrumento,int lenMus,int lenIns);
 

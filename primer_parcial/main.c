@@ -5,6 +5,7 @@
 #include "musico.h"
 #include "instrumento.h"
 #include "orquesta.h"
+#include "informes.h"
 
 #define TRIES 3
 #define LEN_ORQ 50
@@ -21,8 +22,10 @@ int main()
     int flagInstrumento = 0;
     int contadorOrquesta = 0;
     int contadorMusico = 0;
-    int opcion = 0;
-    int escape = 11;
+    int opcionPrimaria = 0;
+    int opcionSecundaria = 0;
+    int escapePrimario = 11;
+    int escapeSecundario = 9;
     int auxiliarIdBorrado;
     int auxiliarIdAltaOrquesta;
     int auxiliarIdAltaInstrumento;
@@ -31,16 +34,21 @@ int main()
         orquesta_initArray(orquestas,LEN_ORQ);
         musico_initArray(musicos,LEN_MUS);
         instrumento_initArray(instrumentos,LEN_INS);
-        while(opcion!=escape)
+
+        informe_crearOrquesta(orquestas);
+        informe_crearInstrumento(instrumentos);
+        informe_crearMusico(musicos);
+
+        while(opcionPrimaria!=escapePrimario)
         {
             printf("\n1.ALTA ORQUESTA\n2.BAJA ORQUESTA\n3.IMPRIMIR ORQUESTAS\n~~~"
                     "\n4.ALTA MUSICO\n5.MODIFICAR MUSICO\n6.BAJA MUSICO\n7.IMPRIMIR MUSICOS\n~~~"
                     "\n8.ALTA INSTRUMENTO\n9.IMPRIMIR INSTRUMENTOS\n10.INFORMES\n11.SALIR\n");
 
-            getIntInRange(&opcion,"\nIngrese opcion: ",
-                          "Informacion invalida\n",1,escape,TRIES);
+            getIntInRange(&opcionPrimaria,"\nIngrese opcion: ",
+                          "Informacion invalida\n",1,escapePrimario,TRIES);
 
-            switch(opcion)
+            switch(opcionPrimaria)
             {
                 case 1:
                 {
@@ -75,13 +83,14 @@ int main()
                 }
                 case 3:
                 {
-                    if(flagOrquesta)
+                    //if(flagOrquesta)
                     {
                         orquesta_printOrquesta(orquestas,LEN_ORQ);
+
                     }
-                    else
+                    //else
                     {
-                        printf("\n\tNo hay orquestas para mostrar\t\n");
+                        //printf("\n\tNo hay orquestas para mostrar\t\n");
                     }
                     break;
                 }
@@ -138,13 +147,13 @@ int main()
                 }
                 case 7:
                 {
-                    if(flagMusico)
+                    //if(flagMusico)
                     {
                         musico_printMusico(musicos,instrumentos,LEN_MUS,LEN_INS);
                     }
-                    else
+                    //else
                     {
-                        printf("\n\tNo hay musicos para mostrar\t\n");
+                        //printf("\n\tNo hay musicos para mostrar\t\n");
                     }
                     break;
                 }
@@ -166,23 +175,69 @@ int main()
                 }
                 case 9:
                 {
-                    if(flagInstrumento)
+                    //if(flagInstrumento)
                     {
                         instrumento_printInstrumento(instrumentos,LEN_INS);
                     }
-                    else
+                    //else
                     {
-                        printf("\n\tNo hay instrumentos para mostrar\t\n");
+                        //printf("\n\tNo hay instrumentos para mostrar\t\n");
                     }
                     break;
                 }
                 case 10:
                 {
+                    printf("\n1.Listar orquesta +5 musicos\n2.Listar musicos +30 edad\n3.Listar orquesta lugar predeterminado\n~~~"
+                    "\n4.Listar orquesta completa\n5.Listar musicos de determinada orquesta\n6.Listar orquesta con + musicos\n~~~"
+                    "\n7.Listar musicos con instrumento de cuerdas\n8.Promedio de musicos por orquesta\n9.SALIR\n");
 
+                    getIntInRange(&opcionSecundaria,"Ingrese opcion: ","Informacion invalida",1,escapeSecundario,TRIES);
+                    switch(opcionSecundaria)
+                    {
+                    case 1:
+                        {
+                            informe_listarOrquestaPorCantidadMusicos(orquestas,LEN_ORQ,musicos,LEN_MUS);///funciona
+                            break;
+                        }
+                    case 2:
+                        {
+                            informe_listarMusicosConMasDe30(orquestas,LEN_ORQ,musicos,LEN_MUS,instrumentos,LEN_INS);///funciona
+                            break;
+                        }
+                    case 3:
+                        {
+                            informe_listarOrquestaPorLugar(orquestas,LEN_ORQ);///funciona
+                            break;
+                        }
+                    case 4:
+                        {
+                            informe_listarOrquestaCompleta(orquestas,LEN_ORQ,musicos,LEN_MUS,instrumentos,LEN_INS); /// FUNCIONA
+                            break;
+                        }
+                    case 5:
+                        {
+                            informe_listarMusicosPorOrquestaDeterminada(orquestas,LEN_ORQ,musicos,LEN_MUS,instrumentos,LEN_INS);///funciona
+                            break;
+                        }
+                    case 6:
+                        {
+                            informe_listarOrquestaConMasMusicos(musicos,LEN_MUS,orquestas,LEN_ORQ);/// muestra basura en la cantidad de musicos
+                            break;
+                        }
+                    case 7:
+                        {
+                            informe_listarMusicosPorTipoDeInstrumento(musicos,LEN_MUS,instrumentos,LEN_INS);///funciona
+                            break;
+                        }
+                    case 8:
+                        {
+                            informe_promedioMusicosPorOrquesta(musicos,LEN_MUS,orquestas,LEN_ORQ,"Informacion invalida",TRIES);///funciona
+                            break;
+                        }
+                    }
                 }
-            fflush(stdin);
             }
+            fflush(stdin);
         }
-
     return 0;
 }

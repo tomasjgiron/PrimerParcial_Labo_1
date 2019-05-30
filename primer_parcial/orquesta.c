@@ -4,6 +4,7 @@
 #include "arraynuevo.h"
 #include "orquesta.h"
 
+
 #define TIPO_SINFO 1
 #define TIPO_FILA 2
 #define TIPO_CAMARA 3
@@ -307,7 +308,6 @@ int orquesta_sortOrquestaNameType(Orquesta* pOrquestas,int len,int order)
 
 int orquesta_printTipo(int tipoOrquesta)
 {
-    printf("\n");
     switch (tipoOrquesta)
     {
         case 1:

@@ -1,6 +1,7 @@
 #ifndef ORQUESTA_H_INCLUDED
 #define ORQUESTA_H_INCLUDED
 
+
 typedef struct
 {
     int idOrquesta; /// se va autoincrementando
@@ -32,7 +33,6 @@ int orquesta_printTipo(int tipoOrquesta);
 //int orquesta_printTotalPromAboveSalary(Orquesta* pOrquestas, int len);
 
 int orquesta_modifyOrquesta(Orquesta* pOrquestas,int len,char* msgE,int escape,int tries);
-
 
 int orquesta_searchFreeSpace(Orquesta* pOrquestas, int len);
 
